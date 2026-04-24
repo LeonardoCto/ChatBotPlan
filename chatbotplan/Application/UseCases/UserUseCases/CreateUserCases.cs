@@ -5,6 +5,7 @@ using ChatBotPlan.Domain.Exceptions;
 using ChatBotPlan.Domain.Interfaces;
 
 namespace ChatBotPlan.Application;
+
 public class CreateUsersCases
 {
     private readonly IUserRepository _userRepository;
@@ -29,7 +30,7 @@ public class CreateUsersCases
         await _userRepository.AddAsync(user, ct);
         await _unitOfWork.CommitAsync(ct);
 
-        return MapToResponse(user);
+        return user.MapToResponse();
     }
 
     private static string NormalizeEmail(string email)
@@ -38,8 +39,8 @@ public class CreateUsersCases
     private async Task EnsureEmailIsUnique(string email, CancellationToken ct)
     {
         var existing = await _userRepository.GetByEmailAsync(email, ct);
-        if(existing != null)
-        throw new EmailAlreadyInUseException(email);
+        if (existing != null)
+            throw new EmailAlreadyInUseException(email);
 
     }
 
@@ -48,8 +49,4 @@ public class CreateUsersCases
         string hash = _hasher.Hash(request.PassWordHash);
         return User.Create(request.Name, email, request.Number, hash);
     }
-
-    private static UserResponseDTO MapToResponse(User user)
-    => new(user.Id, user.Email, user.Name, user.Number);
-
 }

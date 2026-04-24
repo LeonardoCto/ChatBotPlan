@@ -1,13 +1,14 @@
 
+using ChatBotPlan.Application.DTOS;
 using ChatBotPlan.Domain.Entities;
 using ChatBotPlan.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatBotPlan.Infrastructure.Repositories;
 
-public class UserRepository (AppDbContext context): IUserRepository
+public class UserRepository(AppDbContext context) : IUserRepository
 {
-    public  Task<User?> GetByIdAsync(Guid id, CancellationToken ct = default)
+    public Task<User?> GetByIdAsync(Guid id, CancellationToken ct = default)
     => context.Users.FirstOrDefaultAsync(u => u.Id == id, ct);
 
     public Task<User?> GetByEmailAsync(string email, CancellationToken ct = default)
@@ -19,8 +20,7 @@ public class UserRepository (AppDbContext context): IUserRepository
 
     public void Update(User user)
     => context.Users.Update(user);
-    
+
     public void Delete(User user)
         => context.Users.Remove(user);
-
 }

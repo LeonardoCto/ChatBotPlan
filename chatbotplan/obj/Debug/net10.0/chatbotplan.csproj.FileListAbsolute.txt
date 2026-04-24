@@ -158,3 +158,4 @@
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.pdb
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.genruntimeconfig.cache
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/ref/chatbotplan.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.sourcelink.json

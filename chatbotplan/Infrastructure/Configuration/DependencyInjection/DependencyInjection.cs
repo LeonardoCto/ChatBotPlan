@@ -7,6 +7,7 @@ using ChatBotPlan.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatBotPlan.Infrastructure;
+
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
@@ -23,7 +24,7 @@ public static class DependencyInjection
         return services;
     }
 
-     public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<CreateUsersCases>();
         services.AddScoped<GetByIdUserCase>();
