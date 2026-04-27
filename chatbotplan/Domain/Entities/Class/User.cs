@@ -5,7 +5,7 @@ public class User
     public Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
-    public string PassWordHash { get; private set; }
+    public string PassWord { get; private set; }
     public string Number { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
@@ -24,7 +24,7 @@ public class User
             Name = name.Trim(),
             Email = email.Trim().ToLowerInvariant(),
             Number = number.Trim(),
-            PassWordHash = passWordHash,
+            PassWord = passWordHash,
             CreatedAt = DateTime.UtcNow,
         };
     }
@@ -36,7 +36,19 @@ public class User
         ArgumentException.ThrowIfNullOrWhiteSpace(number);
 
         Name = name.Trim();
-        Email = Email.Trim().ToUpperInvariant();
+        Email = email.Trim().ToLowerInvariant();
+        Number = number.Trim();
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UpdatePartial(string? name, string? number)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+            Name = name.Trim();
+
+        if (!string.IsNullOrWhiteSpace(number))
+            Number = number.Trim();
+
         UpdatedAt = DateTime.UtcNow;
     }
 }

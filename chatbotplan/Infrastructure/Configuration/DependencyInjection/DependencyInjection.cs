@@ -20,7 +20,6 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddSingleton<IPasswordHasher, BcryptPasswordHasher>();
-
         return services;
     }
 
@@ -28,7 +27,8 @@ public static class DependencyInjection
     {
         services.AddScoped<CreateUsersCases>();
         services.AddScoped<GetByIdUserCase>();
-
+        services.AddScoped<UpdateUserCase>();
+        services.AddAutoMapper(typeof(UserProfile));
         return services;
     }
 }

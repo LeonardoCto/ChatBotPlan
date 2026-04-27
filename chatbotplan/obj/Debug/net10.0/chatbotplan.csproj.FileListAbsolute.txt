@@ -159,3 +159,5 @@
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.genruntimeconfig.cache
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/ref/chatbotplan.dll
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.sourcelink.json
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/AutoMapper.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -19,8 +19,14 @@ public class CreateUsersCases
         _hasher = passwordHasher;
     }
 
-    public async Task<UserResponseDTO> ExecuteAsync(CreateUserRequestDTO request, CancellationToken ct)
+    public async Task<UserResponseDTO> ExecuteAsync(UserRequestDTO request, CancellationToken ct)
     {
+        if (string.IsNullOrWhiteSpace(request.Name) ||
+            string.IsNullOrWhiteSpace(request.Email) ||
+            string.IsNullOrWhiteSpace(request.Number) ||
+            string.IsNullOrWhiteSpace(request.PassWord))
+            throw new NoFieldsException();
+
         string email = NormalizeEmail(request.Email);
 
         await EnsureEmailIsUnique(email, ct);
@@ -44,9 +50,9 @@ public class CreateUsersCases
 
     }
 
-    private User CreateUser(CreateUserRequestDTO request, string email)
+    private User CreateUser(UserRequestDTO request, string email)
     {
-        string hash = _hasher.Hash(request.PassWordHash);
+        string hash = _hasher.Hash(request.PassWord);
         return User.Create(request.Name, email, request.Number, hash);
     }
 }

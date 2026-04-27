@@ -1,3 +1,4 @@
+using AutoMapper;
 using ChatBotPlan.Application.DTOS;
 using ChatBotPlan.Domain.Entities;
 using ChatBotPlan.Domain.Exceptions;
@@ -8,10 +9,12 @@ namespace ChatBotPlan.Application;
 public class GetByIdUserCase
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public GetByIdUserCase(IUserRepository userRepository)
+    public GetByIdUserCase(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     public async Task<UserResponseDTO> GetById(Guid id, CancellationToken ct)
@@ -20,7 +23,7 @@ public class GetByIdUserCase
         if (user == null)
             throw new UserNotFoundException(id);
 
-        return user.MapToResponse();
+        return _mapper.Map<UserResponseDTO>(user);
 
     }
 }

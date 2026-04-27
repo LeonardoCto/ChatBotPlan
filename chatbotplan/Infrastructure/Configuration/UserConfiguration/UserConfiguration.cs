@@ -25,17 +25,18 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(u => u.Email)
         .IsUnique();
 
-        builder.Property(u => u.PassWordHash)
+        builder.Property(u => u.PassWord)
             .HasColumnName("password_hash")
-            .IsRequired();
+            .IsRequired()
+            .HasMaxLength(70);
 
         builder.Property(u => u.CreatedAt)
             .HasColumnName("created_at");
 
         builder.Property(u => u.UpdatedAt)
             .HasColumnName("updated_at");
-        
+
 
     }
-    
+
 }
