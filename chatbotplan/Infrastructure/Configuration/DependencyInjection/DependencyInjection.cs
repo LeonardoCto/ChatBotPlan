@@ -28,6 +28,7 @@ public static class DependencyInjection
         services.AddScoped<CreateUsersCases>();
         services.AddScoped<GetByIdUserCase>();
         services.AddScoped<UpdateUserCase>();
+        services.AddScoped<DeleteUserCase>();
         services.AddAutoMapper(typeof(UserProfile));
         return services;
     }

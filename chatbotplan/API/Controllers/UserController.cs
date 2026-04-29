@@ -3,12 +3,13 @@ using ChatBotPlan.Application.DTOS;
 using ChatBotPlan.Application;
 using Microsoft.AspNetCore.Mvc;
 using ChatBotPlan.Domain.Entities;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace ChatBotPlan.API.Controllers;
 
 [ApiController]
 [Route("api/users")]
-public class UserController(CreateUsersCases createUser, GetByIdUserCase getByUserId, UpdateUserCase update) : ControllerBase
+public class UserController(CreateUsersCases createUser, GetByIdUserCase getByUserId, UpdateUserCase update, DeleteUserCase delete) : ControllerBase
 {
 
     [HttpPost]
@@ -43,7 +44,13 @@ public class UserController(CreateUsersCases createUser, GetByIdUserCase getByUs
         return Ok(result);
     }
 
-    //[HttpDelete("{id}")]
-    //[ProducesResponseType(typeof(UserResponseDTO))]
+    [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken ct)
+    {
+        await delete.DeleteUser(id, ct);
+        return NoContent();
+    }
 
 }

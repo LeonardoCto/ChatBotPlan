@@ -47,7 +47,6 @@ public class CreateUsersCases
         var existing = await _userRepository.GetByEmailAsync(email, ct);
         if (existing != null)
             throw new EmailAlreadyInUseException(email);
-
     }
 
     private User CreateUser(UserRequestDTO request, string email)
