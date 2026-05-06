@@ -161,3 +161,4 @@
 /Users/leonardocoutinho/Projetos/chatbotplan/obj/Debug/net10.0/chatbotplan.sourcelink.json
 /Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/AutoMapper.dll
 /Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

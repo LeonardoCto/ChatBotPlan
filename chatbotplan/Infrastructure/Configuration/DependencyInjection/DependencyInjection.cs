@@ -20,6 +20,10 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddSingleton<IPasswordHasher, BcryptPasswordHasher>();
+
+        services.AddAuthentication("Bearer").AddJwtBearer();
+        services.AddAuthorization();
+
         return services;
     }
 

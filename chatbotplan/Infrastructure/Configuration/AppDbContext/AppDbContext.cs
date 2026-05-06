@@ -3,6 +3,7 @@ using ChatBotPlan.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatBotPlan.Infrastructure;
+
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
