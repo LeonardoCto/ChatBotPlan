@@ -1,29 +1,30 @@
-using AutoMapper;
 using ChatBotPlan.Application.DTOS;
 using ChatBotPlan.Domain.Entities;
 using ChatBotPlan.Domain.Exceptions;
 using ChatBotPlan.Domain.Interfaces;
+using ChatBotPlan.Infrastructure.Repositories;
 
 namespace ChatBotPlan.Application;
 
-public class GetByIdUserCase
+public class DeleteUserUseCase
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetByIdUserCase(IUserRepository userRepository, IMapper mapper)
+    public DeleteUserUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<UserResponseDTO> GetById(Guid id, CancellationToken ct)
+    public async Task DeleteUser(Guid id, CancellationToken ct)
     {
         var user = await _userRepository.GetByIdAsync(id, ct);
         if (user == null)
             throw new UserNotFoundException(id);
 
-        return _mapper.Map<UserResponseDTO>(user);
+        _userRepository.Delete(user);
 
+        await _unitOfWork.CommitAsync();
     }
 }

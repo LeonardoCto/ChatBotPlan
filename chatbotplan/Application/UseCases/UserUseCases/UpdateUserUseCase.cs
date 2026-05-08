@@ -6,11 +6,11 @@ using ChatBotPlan.Domain.Interfaces;
 
 namespace ChatBotPlan.Application;
 
-public class UpdateUserCase
+public class UpdateUserUseCase
 {
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
-    public UpdateUserCase(IUserRepository userRepo, IUnitOfWork unit)
+    public UpdateUserUseCase(IUserRepository userRepo, IUnitOfWork unit)
     {
         _userRepository = userRepo;
         _unitOfWork = unit;

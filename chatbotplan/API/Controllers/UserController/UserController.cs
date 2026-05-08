@@ -9,7 +9,7 @@ namespace ChatBotPlan.API.Controllers;
 
 [ApiController]
 [Route("api/users")]
-public class UserController(CreateUsersCases createUser, GetByIdUserCase getByUserId, UpdateUserCase update, DeleteUserCase delete) : ControllerBase
+public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase getByUserId, UpdateUserUseCase update, DeleteUserUseCase delete) : ControllerBase
 {
 
     [HttpPost]

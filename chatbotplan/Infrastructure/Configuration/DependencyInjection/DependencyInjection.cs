@@ -24,6 +24,10 @@ public static class DependencyInjection
         services.AddAuthentication("Bearer").AddJwtBearer();
         services.AddAuthorization();
 
+        services.AddScoped<ITokenService, TokenService>();
+
+        services.Configure<TokenSettings>(configuration.GetSection("JWT"));
+
         return services;
     }
 
