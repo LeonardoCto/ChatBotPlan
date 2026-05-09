@@ -9,8 +9,8 @@ public class User
     public string Number { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public string? RefreshToken { get; private set; }
-    public DateTime? RefreshTokenExpiretTime { get; private set; }
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
 
     public User() { }
     public static User Create(string name, string email, string number, string passWordHash)

@@ -5,6 +5,7 @@ using ChatBotPlan.Domain;
 using ChatBotPlan.Infrastructure.Repositories;
 using ChatBotPlan.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
+using ChatBotPlan.Application.Interfaces;
 
 namespace ChatBotPlan.Infrastructure;
 
@@ -21,9 +22,6 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddSingleton<IPasswordHasher, BcryptPasswordHasher>();
 
-        services.AddAuthentication("Bearer").AddJwtBearer();
-        services.AddAuthorization();
-
         services.AddScoped<ITokenService, TokenService>();
 
         services.Configure<TokenSettings>(configuration.GetSection("JWT"));
@@ -33,10 +31,12 @@ public static class DependencyInjection
 
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<CreateUsersCases>();
-        services.AddScoped<GetByIdUserCase>();
-        services.AddScoped<UpdateUserCase>();
-        services.AddScoped<DeleteUserCase>();
+        services.AddScoped<CreateUsersUseCase>();
+        services.AddScoped<GetByIdUserUseCase>();
+        services.AddScoped<UpdateUserUseCase>();
+        services.AddScoped<DeleteUserUseCase>();
+        services.AddScoped<AuthUserUseCase>();
+        services.AddScoped<IUserValidator, UserValidator>();
         services.AddAutoMapper(typeof(UserProfile));
         return services;
     }

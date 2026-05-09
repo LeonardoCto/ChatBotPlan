@@ -1,6 +1,7 @@
 using ChatBotPlan.Domain.Interfaces;
 
 namespace ChatBotPlan.Infrastructure.Security;
+
 public class BcryptPasswordHasher : IPasswordHasher
 {
     public string Hash(string password)
