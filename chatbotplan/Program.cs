@@ -1,4 +1,5 @@
 using System.Text;
+using Azure.Identity;
 using ChatBotPlan.Infrastructure;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,6 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultUrl = builder.Configuration["KeyVault:Url"];
+builder.Configuration.AddAzureKeyVault(
+    new Uri(keyVaultUrl),
+    new DefaultAzureCredential()
+);
 
 builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 

@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
 using System.Security.Claims;
 using ChatBotPlan.Application.Interfaces;
+using ChatBotPlan.Domain.Exceptions;
 using ChatBotPlan.Domain.Interfaces;
 using ChatBotPlan.Infrastructure;
 using Microsoft.Extensions.Options;
@@ -32,7 +33,7 @@ public class AuthUserUseCase
     {
         var user = await _userRepository.GetByEmailAsync(request.Email, ct);
         if (user == null || !_hasher.Verify(request.Password, user.PassWord))
-            throw new InvalidCredentialException();
+            throw new DomainException("Invalid email or password.");
 
         var authClaims = new List<Claim>
         {
