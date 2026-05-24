@@ -41,6 +41,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateUserUseCase>();
         services.AddScoped<DeleteUserUseCase>();
         services.AddScoped<AuthUserUseCase>();
+        services.AddScoped<UpdateEmailUseCase>();
         services.AddScoped<IUserValidator, UserValidator>();
         services.AddAutoMapper(typeof(UserProfile));
         services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();

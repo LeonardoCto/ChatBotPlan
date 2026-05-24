@@ -1,3 +1,15 @@
 
+using System.Net;
+
 namespace ChatBotPlan.Domain.Exceptions;
-public abstract class DomainException(string message): Exception(message);
+
+public class DomainException : Exception
+{
+    public HttpStatusCode StatusCode { get; }
+
+    public DomainException(string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+        : base(message)
+    {
+        StatusCode = statusCode;
+    }
+}

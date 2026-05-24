@@ -4,6 +4,7 @@ using ChatBotPlan.Application;
 using Microsoft.AspNetCore.Mvc;
 using ChatBotPlan.Domain.Entities;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChatBotPlan.API.Controllers;
 
@@ -22,7 +23,7 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     [ProducesResponseType(typeof(UserResponseDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
@@ -31,6 +32,7 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
         return Ok(result);
     }
 
+    [Authorize]
     [HttpPatch("{id}")]
     [ProducesResponseType(typeof(UpdateUserDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,6 +46,7 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
         return Ok(result);
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,14 +56,26 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
         return NoContent();
     }
 
+    [Authorize]
     [HttpPatch]
-    [Route("update-email({newEmail})")]
+    [HttpPatch("update-email/{newEmail}")]
     [ProducesResponseType(typeof(UpdateUserDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateEmail([FromRoute] string newEmail, [FromBody] UpdateUserDTO user, CancellationToken ct)
     {
-        var result = await updateEmail.ExecuteAsync(newEmail, user, ct);
-        return Ok(result);
+        await updateEmail.ExecuteAsync(newEmail, user, ct);
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpPatch]
+    [HttpPatch("confirm-email-update/{code}")]
+    [ProducesResponseType(typeof(UpdateUserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ConfirmEmailUpdate([FromRoute] string code, [FromBody] UpdateUserDTO user, CancellationToken ct)
+    {
+        await updateEmail.ConfirmEmailChangeAsync(code, user, ct);
+        return NoContent();
     }
 
 }

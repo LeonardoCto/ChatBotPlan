@@ -12,9 +12,13 @@ public class UserVerificationCodeRepository(AppDbContext context) : IUserVerific
     public void Delete(UserVerificationCode code)
     => context.UserVerificationCodes.Remove(code);
 
-    public async Task<UserVerificationCode?> GetActiveCodeAsync(Guid userId, VerificationCodeType type, CancellationToken ct)
+    public async Task<UserVerificationCode?> GetActiveCodeAsync(string code, Guid userId, VerificationCodeType type, CancellationToken ct)
     => await context.UserVerificationCodes.FirstOrDefaultAsync(c => c.UserId == userId
     && c.Type == type
+    && c.Code == code
     && c.Expiration > DateTime.UtcNow
     && !c.IsUsed, ct);
+
+    public void Update(UserVerificationCode code)
+    => context.UserVerificationCodes.Update(code);
 }

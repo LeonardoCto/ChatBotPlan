@@ -56,4 +56,12 @@ public class User
 
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void UpdateEmail(string? email)
+    {
+        if (!string.IsNullOrWhiteSpace(email))
+            Email = email.Trim().ToLowerInvariant();
+
+        UpdatedAt = DateTime.UtcNow;
+    }
 }

@@ -17,7 +17,8 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserDTO>
 
         RuleFor(x => x)
             .Must(x => !string.IsNullOrWhiteSpace(x.Name) ||
-                       !string.IsNullOrWhiteSpace(x.Number))
+                       !string.IsNullOrWhiteSpace(x.Number) ||
+                       !string.IsNullOrWhiteSpace(x.Email))
             .WithMessage("Informe pelo menos um campo para atualizar");
     }
 }

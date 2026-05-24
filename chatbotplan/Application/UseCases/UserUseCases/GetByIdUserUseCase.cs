@@ -21,7 +21,7 @@ public class GetByIdUserUseCase
     {
         var user = await _userRepository.GetByIdAsync(id, ct);
         if (user == null)
-            throw new UserNotFoundException(id);
+            throw new DomainException($"User with id '{id}' not found");
 
         return _mapper.Map<UserResponseDTO>(user);
 
