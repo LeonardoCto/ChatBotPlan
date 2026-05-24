@@ -8,17 +8,17 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserDTO>
     public UpdateUserValidator()
     {
         RuleFor(x => x.Name)
-            .MinimumLength(3).WithMessage("Nome deve ter no mínimo 3 caracteres")
+            .MinimumLength(3).WithMessage("Name must have at least 3 characters")
             .When(x => !string.IsNullOrWhiteSpace(x.Name));
 
         RuleFor(x => x.Number)
-            .MinimumLength(10).WithMessage("Número inválido")
+            .MinimumLength(10).WithMessage("Invalid number")
             .When(x => !string.IsNullOrWhiteSpace(x.Number));
 
         RuleFor(x => x)
             .Must(x => !string.IsNullOrWhiteSpace(x.Name) ||
                        !string.IsNullOrWhiteSpace(x.Number) ||
                        !string.IsNullOrWhiteSpace(x.Email))
-            .WithMessage("Informe pelo menos um campo para atualizar");
+            .WithMessage("At least one field (name, number, or email) must be provided for update");
     }
 }

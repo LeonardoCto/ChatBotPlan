@@ -8,19 +8,19 @@ public class CreateUserValidator : AbstractValidator<UserRequestDTO>
     public CreateUserValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Nome é obrigatório")
-            .MinimumLength(3).WithMessage("Nome deve ter no mínimo 3 caracteres");
+            .NotEmpty().WithMessage("Field name is required")
+            .MinimumLength(3).WithMessage("Name must have at least 3 characters");
 
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email é obrigatório")
-            .EmailAddress().WithMessage("Email inválido");
+            .NotEmpty().WithMessage("Email is required")
+            .EmailAddress().WithMessage("Invalid email");
 
         RuleFor(x => x.Number)
-            .NotEmpty().WithMessage("Número é obrigatório")
-            .MinimumLength(10).WithMessage("Número inválido");
+            .NotEmpty().WithMessage("Number is required")
+            .MinimumLength(10).WithMessage("Invalid number");
 
         RuleFor(x => x.PassWord)
-            .NotEmpty().WithMessage("Senha é obrigatória")
-            .MinimumLength(6).WithMessage("Senha deve ter no mínimo 6 caracteres");
+            .NotEmpty().WithMessage("Password is required")
+            .MinimumLength(6).WithMessage("Password must have at least 6 characters");
     }
 }

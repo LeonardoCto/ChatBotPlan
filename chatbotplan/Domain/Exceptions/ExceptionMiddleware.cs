@@ -27,7 +27,7 @@ public class ExceptionMiddleware
     private static Task HandleExcpetion(HttpContext context, Exception excpt)
     {
         var statusCode = HttpStatusCode.InternalServerError;
-        var message = "Erro interno";
+        var message = "Internal Server Error";
 
         if (excpt is ArgumentException)
         {
