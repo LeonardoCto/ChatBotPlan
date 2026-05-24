@@ -9,7 +9,7 @@ namespace ChatBotPlan.API.Controllers;
 
 [ApiController]
 [Route("api/users")]
-public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase getByUserId, UpdateUserUseCase update, DeleteUserUseCase delete) : ControllerBase
+public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase getByUserId, UpdateUserUseCase update, UpdateEmailUseCase updateEmail, DeleteUserUseCase delete) : ControllerBase
 {
 
     [HttpPost]
@@ -51,6 +51,16 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
     {
         await delete.DeleteUser(id, ct);
         return NoContent();
+    }
+
+    [HttpPatch]
+    [Route("update-email({newEmail})")]
+    [ProducesResponseType(typeof(UpdateUserDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateEmail([FromRoute] string newEmail, [FromBody] UpdateUserDTO user, CancellationToken ct)
+    {
+        var result = await updateEmail.ExecuteAsync(newEmail, user, ct);
+        return Ok(result);
     }
 
 }

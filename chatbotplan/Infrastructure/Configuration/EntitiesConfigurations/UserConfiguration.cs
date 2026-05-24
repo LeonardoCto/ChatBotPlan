@@ -30,6 +30,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(70);
 
+        builder.Property(u => u.Role);
+
         builder.Property(u => u.CreatedAt)
             .HasColumnName("created_at");
 

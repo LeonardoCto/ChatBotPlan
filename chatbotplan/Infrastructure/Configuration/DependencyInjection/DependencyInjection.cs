@@ -6,6 +6,7 @@ using ChatBotPlan.Infrastructure.Repositories;
 using ChatBotPlan.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using ChatBotPlan.Application.Interfaces;
+using FluentValidation;
 
 namespace ChatBotPlan.Infrastructure;
 
@@ -23,8 +24,12 @@ public static class DependencyInjection
         services.AddSingleton<IPasswordHasher, BcryptPasswordHasher>();
 
         services.AddScoped<ITokenService, TokenService>();
-
         services.Configure<TokenSettings>(configuration.GetSection("JWT"));
+
+        services.Configure<AzureEmailSettings>(configuration.GetSection("AzureEmail"));
+        services.AddScoped<IEmailService, AzureEmailAdapter>();
+
+        services.AddScoped<IUserVerificationCodeRepository, UserVerificationCodeRepository>();
 
         return services;
     }
@@ -38,6 +43,7 @@ public static class DependencyInjection
         services.AddScoped<AuthUserUseCase>();
         services.AddScoped<IUserValidator, UserValidator>();
         services.AddAutoMapper(typeof(UserProfile));
+        services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
         return services;
     }
 }

@@ -1,5 +1,6 @@
 using System.Text;
 using ChatBotPlan.Infrastructure;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
+
+builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

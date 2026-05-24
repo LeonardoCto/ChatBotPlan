@@ -17,11 +17,6 @@ public class UpdateUserUseCase
     }
     public async Task<UserResponseDTO> ExecuteAsync(Guid id, UpdateUserDTO request, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(request.Name) &&
-            string.IsNullOrWhiteSpace(request.Email) &&
-            string.IsNullOrWhiteSpace(request.Number))
-            throw new NoFieldsException();
-
         User user = await _userRepository.GetByIdAsync(id, ct);
         if (user == null)
             throw new UserNotFoundException(id);

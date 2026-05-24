@@ -12,7 +12,6 @@ public class CreateUsersUseCase
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordHasher _hasher;
-
     private readonly IUserValidator _userValidator;
 
     public CreateUsersUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IPasswordHasher passwordHasher, IUserValidator userValidator)
@@ -25,12 +24,6 @@ public class CreateUsersUseCase
 
     public async Task<UserResponseDTO> ExecuteAsync(UserRequestDTO request, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(request.Name) ||
-            string.IsNullOrWhiteSpace(request.Email) ||
-            string.IsNullOrWhiteSpace(request.Number) ||
-            string.IsNullOrWhiteSpace(request.PassWord))
-            throw new NoFieldsException();
-
         string email = NormalizeEmail(request.Email);
 
         await _userValidator.EnsureEmailIsUniqueAsync(email);

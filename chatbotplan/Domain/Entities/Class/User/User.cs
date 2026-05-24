@@ -11,6 +11,9 @@ public class User
     public DateTime UpdatedAt { get; private set; }
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiryTime { get; set; }
+    public UserRoles Role { get; private set; }
+    public DateTime? EmailChangeCodeExpiry { get; set; }
+    public string? EmailChangeCode { get; set; }
 
     public User() { }
     public static User Create(string name, string email, string number, string passWordHash)

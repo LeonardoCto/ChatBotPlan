@@ -1,4 +1,5 @@
 
+using ChatBotPlan.Domain;
 using ChatBotPlan.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace ChatBotPlan.Infrastructure;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users => Set<User>();
+    public DbSet<UserVerificationCode> UserVerificationCodes => Set<UserVerificationCode>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
