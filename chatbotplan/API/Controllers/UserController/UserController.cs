@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using ChatBotPlan.Domain.Entities;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace ChatBotPlan.API.Controllers;
 
 [ApiController]
 [Route("api/users")]
-public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase getByUserId, UpdateUserUseCase update, UpdateEmailUseCase updateEmail, DeleteUserUseCase delete) : ControllerBase
+public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase getByUserId, UpdateUserUseCase update, UpdateEmailUseCase updateEmail, DeleteUserUseCase delete, UpdatePasswordUseCase updatePassWord) : ControllerBase
 {
 
     [HttpPost]
@@ -46,7 +47,7 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
         return Ok(result);
     }
 
-    [Authorize]
+    [Authorize(Policy = "AdminOnly")]
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,6 +77,23 @@ public class UserController(CreateUsersUseCase createUser, GetByIdUserUseCase ge
     {
         await updateEmail.ConfirmEmailChangeAsync(code, user, ct);
         return NoContent();
+    }
+
+    [Authorize]
+    [HttpPatch("update-password")]
+    public async Task<IActionResult> UpdatePassWord([FromBody] UpdatePassWordDTO request, CancellationToken ct)
+    {
+        await updatePassWord.ExecuteAsync(request, ct);
+        return Ok();
+    }
+
+    [Authorize]
+    [HttpPatch("confirm-passwordChange")]
+    public async Task<IActionResult> ConfirmPassWordChange([FromBody] UpdatePassWordDTO request, CancellationToken ct)
+    {
+        await updatePassWord.ConfirmPassWordChange(request, ct);
+        return Ok();
+
     }
 
 }

@@ -56,7 +56,7 @@ public class UpdateEmailUseCase
             throw new DomainException("Invalid or expired verification code");
 
         user.UpdateEmail(verificationCode.PendingValue);
-        verificationCode.IsUsed = true;
+        verificationCode.MarkAsUsed();
         _userRepository.Update(user);
         _userVerificationCodeRepository.Update(verificationCode);
 

@@ -21,7 +21,7 @@ public class UpdateUserUseCase
         if (user == null)
             throw new DomainException($"User with id '{id}' not found");
 
-        user.UpdatePartial(request.Name, request.Number);
+        user.Update(request.Name, request.Number);
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync(ct);

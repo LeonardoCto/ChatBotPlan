@@ -30,6 +30,11 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddProblemDetails();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
+
 var secretKey = builder.Configuration["JWT:SecretKey"]
     ?? throw new ArgumentException("Invalid secret key!!");
 

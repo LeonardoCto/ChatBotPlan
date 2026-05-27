@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
         return Ok(refresh);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     [HttpPost]
     [Route("revoke")]
     public async Task<IActionResult> Revoke([FromBody] RevokeTokenDTO request, CancellationToken ct)

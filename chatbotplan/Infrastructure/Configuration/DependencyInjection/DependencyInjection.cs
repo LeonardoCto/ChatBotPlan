@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<GetByIdUserUseCase>();
         services.AddScoped<UpdateUserUseCase>();
         services.AddScoped<DeleteUserUseCase>();
+        services.AddScoped<UpdatePasswordUseCase>();
         services.AddScoped<AuthUserUseCase>();
         services.AddScoped<UpdateEmailUseCase>();
         services.AddScoped<IUserValidator, UserValidator>();

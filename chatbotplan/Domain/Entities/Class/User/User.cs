@@ -9,14 +9,12 @@ public class User
     public string Number { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public string? RefreshToken { get; set; }
-    public DateTime? RefreshTokenExpiryTime { get; set; }
+    public string? RefreshToken { get; private set; }
+    public DateTime? RefreshTokenExpiryTime { get; private set; }
     public UserRoles Role { get; private set; }
-    public DateTime? EmailChangeCodeExpiry { get; set; }
-    public string? EmailChangeCode { get; set; }
 
     public User() { }
-    public static User Create(string name, string email, string number, string passWordHash)
+    public static User Create(string name, string email, string number, string passWordHash, UserRoles role = UserRoles.User)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(email);
@@ -31,37 +29,38 @@ public class User
             Number = number.Trim(),
             PassWord = passWordHash,
             CreatedAt = DateTime.UtcNow,
+            Role = role
         };
     }
 
-    public void Update(string name, string email, string number)
+    public void Update(string name, string number)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
-        ArgumentException.ThrowIfNullOrWhiteSpace(email);
         ArgumentException.ThrowIfNullOrWhiteSpace(number);
 
         Name = name.Trim();
-        Email = email.Trim().ToLowerInvariant();
         Number = number.Trim();
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void UpdatePartial(string? name, string? number)
-    {
-        if (!string.IsNullOrWhiteSpace(name))
-            Name = name.Trim();
-
-        if (!string.IsNullOrWhiteSpace(number))
-            Number = number.Trim();
-
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void UpdateEmail(string? email)
+    public void UpdateEmail(string email)
     {
         if (!string.IsNullOrWhiteSpace(email))
             Email = email.Trim().ToLowerInvariant();
 
         UpdatedAt = DateTime.UtcNow;
+    }
+    public void UpdatePassWord(string passWordHash)
+    {
+        if (!string.IsNullOrEmpty(passWordHash))
+            PassWord = passWordHash;
+
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetRefreshToken(string token, DateTime expiry)
+    {
+        RefreshToken = token;
+        RefreshTokenExpiryTime = expiry;
     }
 }

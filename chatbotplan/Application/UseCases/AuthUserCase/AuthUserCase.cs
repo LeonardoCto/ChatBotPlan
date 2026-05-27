@@ -39,6 +39,7 @@ public class AuthUserUseCase
         {
             new Claim(ClaimTypes.Name, user.Name!),
             new Claim(ClaimTypes.Email, user.Email!),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
         };
@@ -47,9 +48,7 @@ public class AuthUserUseCase
         var refreshToken = _tokenService.GenerateRefreshToken();
 
         var refreshTokenValidityInMinutes = _settings.RefreshTokenValidityMinutes;
-
-        user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(refreshTokenValidityInMinutes);
+        user.SetRefreshToken(refreshToken, DateTime.UtcNow.AddMinutes(refreshTokenValidityInMinutes));
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync(ct);
@@ -86,9 +85,7 @@ public class AuthUserUseCase
         var newAccessToken = _tokenService.GenerateAccessToken(claims.Claims);
         var newRefreshToken = _tokenService.GenerateRefreshToken();
 
-
-        user.RefreshToken = newRefreshToken;
-        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(_settings.RefreshTokenValidityMinutes);
+        user.SetRefreshToken(newRefreshToken, DateTime.UtcNow.AddMinutes(_settings.RefreshTokenValidityMinutes));
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync(ct);
@@ -106,8 +103,7 @@ public class AuthUserUseCase
         if (user == null)
             throw new ArgumentException("User not found.");
 
-        user.RefreshToken = null;
-        user.RefreshTokenExpiryTime = null;
+        user.SetRefreshToken(null!, DateTime.UtcNow);
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync(ct);
