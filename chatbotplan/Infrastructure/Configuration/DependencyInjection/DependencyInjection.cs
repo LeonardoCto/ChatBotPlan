@@ -1,12 +1,14 @@
 
 using ChatBotPlan.Application;
 using ChatBotPlan.Domain.Interfaces;
-using ChatBotPlan.Domain;
 using ChatBotPlan.Infrastructure.Repositories;
 using ChatBotPlan.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using ChatBotPlan.Application.Interfaces;
 using FluentValidation;
+using Microsoft.Extensions.AI;
+using OllamaSharp;
+using Microsoft.Extensions.Options;
 
 namespace ChatBotPlan.Infrastructure;
 
@@ -31,12 +33,27 @@ public static class DependencyInjection
 
         services.AddScoped<IUserVerificationCodeRepository, UserVerificationCodeRepository>();
 
+        services.AddScoped<ILLMService, OllamaAdapter>();
+        services.Configure<OllamaSettings>(configuration.GetSection("Ollama"));
+
+        services.AddSingleton<IChatClient>(sp =>
+        {
+            var settings = sp.GetRequiredService<IOptions<OllamaSettings>>().Value;
+            return new OllamaChatClient(settings.Url, settings.Model);
+        });
+
+        services.AddScoped<IChatMemory, RedisChatMemory>();
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContext, UserContext>();
+
         return services;
     }
 
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<CreateUsersUseCase>();
+        services.AddScoped<SendMessageUseCase>();
         services.AddScoped<GetByIdUserUseCase>();
         services.AddScoped<UpdateUserUseCase>();
         services.AddScoped<DeleteUserUseCase>();
@@ -49,3 +66,4 @@ public static class DependencyInjection
         return services;
     }
 }
+

@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Configuration.AddAzureKeyVault(
 builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(
+    ConnectionMultiplexer.Connect("localhost:6379"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

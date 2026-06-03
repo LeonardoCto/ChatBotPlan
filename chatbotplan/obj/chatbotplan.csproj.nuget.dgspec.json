@@ -96,9 +96,25 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "Microsoft.Extensions.AI": {
+              "target": "Package",
+              "version": "[10.6.0, )"
+            },
+            "Microsoft.Extensions.AI.Ollama": {
+              "target": "Package",
+              "version": "[9.7.0-preview.1.25356.2, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "OllamaSharp": {
+              "target": "Package",
+              "version": "[5.4.25, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.13.17, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

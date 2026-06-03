@@ -168,3 +168,11 @@
 /Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Azure.Communication.Email.dll
 /Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Azure.Extensions.AspNetCore.Configuration.Secrets.dll
 /Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Azure.Security.KeyVault.Secrets.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Microsoft.Extensions.AI.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Microsoft.Extensions.AI.Abstractions.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Microsoft.Extensions.AI.Ollama.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/OllamaSharp.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/System.Numerics.Tensors.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/Pipelines.Sockets.Unofficial.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/StackExchange.Redis.dll
+/Users/leonardocoutinho/Projetos/chatbotplan/bin/Debug/net10.0/System.IO.Hashing.dll
