@@ -26,7 +26,7 @@ WhatsApp (Webhook) → API → RabbitMQ → Ollama AI → SignalR → Frontend
 
 ## 🛠 Technologies
 
-| Technologie | Purpose |
+| Technology | Purpose |
 |-----------|-----------|
 | ASP.NET Core 9 | Core framework |
 | JWT + Roles | Authentication and authorization |
