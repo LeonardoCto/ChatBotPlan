@@ -4,6 +4,8 @@ WhatsApp customer service plataform with AI
 
 Built with ASP.NET CORE following Clean architecture and SOLID principles.
 
+This project is driven by my desire to level up my technical skills. I already have solid experience working with complex concepts and large-scale systems, but I've had limited hands-on exposure to key industry tools and frameworks — spanning AI, containerization, caching, message queues, cloud infrastructure, and more. I'm passionate about learning by building, and I genuinely enjoy thinking through scalability challenges, architectural decisions, and the tradeoffs that come with them. And there's no better way to grow than through your own projects..
+
 ---
 
 ## 🏛 Architecture
@@ -22,9 +24,9 @@ WhatsApp (Webhook) → API → RabbitMQ → Ollama AI → SignalR → Frontend
 
 ---
 
-## 🛠 Tecnologias
+## 🛠 Technologies
 
-| Tecnologia | Finalidade |
+| Techologue | Purpose |
 |-----------|-----------|
 | ASP.NET Core 9 | Core framework |
 | JWT + Roles | Authentication and authorization |
@@ -43,7 +45,7 @@ WhatsApp (Webhook) → API → RabbitMQ → Ollama AI → SignalR → Frontend
 
 ---
 
-## 📁 Estrutura
+## 📁 Structure
 
 ```
 ChatBotPlan/
@@ -65,7 +67,7 @@ ChatBotPlan/
 - [x] FluentValidation + Exception Middleware
 - [x] Azure Key Vault + Email Service
 
-**🔄 Phase 2 — Messagerua & Real-time**
+**🔄 Phase 2 — Messageria & Real-time**
 - [ ] RabbitMQ
 - [ ] [] Docker
 - [ ] SignalR
@@ -76,6 +78,6 @@ ChatBotPlan/
 - [ ] Bot configuration
 - [ ] Rate limiting
 
-**🔭 Fase 4 — MCP**
+**🔭 Phase 4 — MCP**
 - [ ] Model Context Protocol
 - [ ] Each tenant integrates yours own sources(orders, schedules...)
