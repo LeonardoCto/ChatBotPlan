@@ -51,7 +51,7 @@ WhatsApp (Webhook) → API → RabbitMQ → Ollama AI → SignalR → Frontend
 ChatBotPlan/
 ├── API/                  → Controllers, Middlewares
 ├── Application/          → Use Cases, DTOs, Interfaces
-├── Domain/               → Entidades, Exceções de domínio
+├── Domain/               → Entities, Domain excptions
 └── Infrastructure/       → Redis, Ollama, JWT, RabbitMQ, EF Core
 ```
 
